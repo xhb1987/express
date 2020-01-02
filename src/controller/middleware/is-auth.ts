@@ -12,7 +12,7 @@ const IsAuth = async (action: Action, roles: string[]) => {
 
     const { name, role } = (await verify(
       jwtToken,
-      process.env.SECRET as string
+      process.env.SECRET
     )) as {
       name: string;
       role: string[];

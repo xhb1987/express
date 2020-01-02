@@ -23,13 +23,6 @@ class UserController {
   @Inject()
   userService!: UserService;
 
-  @Get("/me")
-  async getMeInfo(): Promise<ResponseMessage<string>> {
-    console.log('tests')
-    const responseMessage = generateResponseMessage<string>("test");
-    return responseMessage;
-  }
-
   @Get("/all")
   async getAllUser(): Promise<ResponseMessage<string[]>> {
     const users = await this.userService.find();
@@ -118,7 +111,7 @@ class UserController {
       return compare(user.password, foundUser?.password || "").then(res => {
         const jwtToken = sign(
           { name: foundUser?.name, role: foundUser?.role.map(rl => rl.name) },
-          process.env.SECRET as string,
+          process.env.SECRET,
           {
             expiresIn: "1 day"
           }
@@ -141,12 +134,12 @@ class UserController {
       const jwtToken = token.split(" ")[1];
       const decoded = (await verify(
         jwtToken,
-        process.env.SECRET as string
+        process.env.SECRET
       )) as { name: string; role: string[] };
 
       const newToken = sign(
         { name: decoded.name, role: decoded.role },
-        process.env.SECRET as string,
+        process.env.SECRET,
         {
           expiresIn: "1 day"
         }

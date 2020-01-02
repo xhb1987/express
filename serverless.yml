@@ -1,0 +1,17 @@
+service: serverless-project-name
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  region: region, 'us-east-1'
+  memorySize: 256
+  timeout: 3
+  stage: "dev"
+
+functions:
+  - ${file(./src/controller/user-controller/user.yml)}
+  - ${file(./test.yml)}
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline

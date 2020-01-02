@@ -1,0 +1,7 @@
+testApp:
+  handler: src/app.handler
+  events:
+    - http:
+        path: /test
+        method: get
+        cors: true

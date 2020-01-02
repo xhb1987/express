@@ -1,7 +1,7 @@
 import Repository from "../repository/base-repository";
 import { IUserModel } from "./types";
 import { Service } from "typedi";
-import { UserModel } from "./user-schema";
+import { UserModel } from "./schema";
 
 @Service()
 class UserRepository extends Repository<IUserModel> {

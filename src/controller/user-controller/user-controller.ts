@@ -13,7 +13,7 @@ import {
   HeaderParam,
   Authorized
 } from "routing-controllers";
-import { UserModel } from "../../model/user/user-schema";
+import { UserModel } from "../../model/user/schema";
 import { RoleModel } from "../../model/role/schema";
 import { hash, compare } from "bcrypt";
 import { sign, verify } from "jsonwebtoken";

@@ -1,8 +1,8 @@
 import { Service, Inject } from "typedi";
-import UserRepository from "../../model/user/user-repository";
-import { IUser, IUserModel } from "../../model/user/types";
+import UserRepository from "../../model/user/repository";
+import { IUserModel } from "../../model/user/types";
 import RoleRepository from "../../model/role/repository";
-import { IRole, IRoleModel } from "../../model/role/types";
+import { IRoleModel } from "../../model/role/types";
 
 @Service()
 class UserService {

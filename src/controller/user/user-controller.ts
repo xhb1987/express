@@ -1,6 +1,6 @@
 import UserService from "../../service/user-service/user-service";
 import { Inject } from "typedi";
-import { IUser } from "../../model/user/types";
+import { IUser, IUserModel } from "../../model/user/types";
 import { IRole } from "../../model/role/types";
 import generateResponseMessage from "../../common/response-messge/response-message";
 import { Message, ResponseMessage } from "../../common/response-messge/types";
@@ -11,7 +11,8 @@ import {
   JsonController,
   Param,
   HeaderParam,
-  Authorized
+  Authorized,
+  CurrentUser
 } from "routing-controllers";
 import { UserModel } from "../../model/user/schema";
 import { RoleModel } from "../../model/role/schema";
@@ -111,7 +112,7 @@ class UserController {
       return compare(user.password, foundUser?.password || "").then(res => {
         const jwtToken = sign(
           { name: foundUser?.name, role: foundUser?.role.map(rl => rl.name) },
-          process.env.SECRET,
+          process.env.SECRET ?? "test",
           {
             expiresIn: "1 day"
           }
@@ -126,20 +127,14 @@ class UserController {
   }
 
   @Post("/token")
-  @Authorized(["ADMIN"])
+  @Authorized()
   async tokenRenew(
-    @HeaderParam("authorization") token: string
+    @CurrentUser({ required: true }) user: IUserModel
   ): Promise<ResponseMessage<string | object>> {
     try {
-      const jwtToken = token.split(" ")[1];
-      const decoded = (await verify(
-        jwtToken,
-        process.env.SECRET
-      )) as { name: string; role: string[] };
-
       const newToken = sign(
-        { name: decoded.name, role: decoded.role },
-        process.env.SECRET,
+        { name: user.name, role: user.role },
+        process.env.SECRET ?? "test",
         {
           expiresIn: "1 day"
         }

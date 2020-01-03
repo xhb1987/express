@@ -1,15 +1,11 @@
-userApp:
+weatherApp:
   handler: src/app.handler
   events:
     - http:
-        path: /user/all
+        path: /weather/location/{city}
         method: get
         cors: true
     - http:
-        path: /user/me
+        path: /weather/weather/{woeid}
         method: get
-        cors: true
-    - http:
-        path: /user/login
-        method: post
         cors: true

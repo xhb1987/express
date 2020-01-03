@@ -2,8 +2,8 @@ import {
   ExpressErrorMiddlewareInterface,
   Middleware
 } from "routing-controllers";
-import { NextFunction, Response, Request } from "express";
-import { ResponseMessage, Message } from "../../common/response-messge/types";
+import { Response, Request } from "express";
+import { Message } from "../../common/response-messge/types";
 import generateResponseMessage from "../../common/response-messge/response-message";
 
 @Middleware({ type: "after" })

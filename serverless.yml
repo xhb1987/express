@@ -7,10 +7,14 @@ provider:
   memorySize: 256
   timeout: 3
   stage: "dev"
+  environment:
+    SECRET: test-secret
 
 functions:
-  - ${file(./src/controller/user-controller/user.yml)}
+  - ${file(./src/controller/user/user.yml)}
+  - ${file(./src/controller/weather/weather.yml)}
   - ${file(./test.yml)}
+ 
 
 plugins:
   - serverless-plugin-typescript

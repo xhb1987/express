@@ -1,0 +1,19 @@
+userApp:
+  handler: src/app.handler
+  events:
+    - http:
+        path: /user/all
+        method: get
+        cors: true
+    - http:
+        path: /user/me
+        method: get
+        cors: true
+    - http:
+        path: /user/login
+        method: post
+        cors: true
+    - http:
+        path: /user/token
+        method: post
+        cors: true

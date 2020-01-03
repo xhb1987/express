@@ -1,24 +1,23 @@
-import { Request, Response, NextFunction } from "express";
-import { ExpressMiddlewareInterface, Action } from "routing-controllers";
+import { Action } from "routing-controllers";
 import { verify } from "jsonwebtoken";
 import UserService from "../../service/user-service/user-service";
 import { difference } from "lodash";
+import { isTokenExist } from "./helper";
 const IsAuth = async (action: Action, roles: string[]) => {
   try {
     const jwtToken = action.request.get("authorization").split(" ")[1];
-    if (jwtToken === null || jwtToken === undefined) {
+    if (!isTokenExist(jwtToken)) {
       return false;
     }
-
+    console.log(process.env);
     const { name, role } = (await verify(
       jwtToken,
-      process.env.SECRET
+      process.env.SECRET ?? "test"
     )) as {
       name: string;
       role: string[];
     };
 
-    
     const userService = new UserService();
     const user = await userService.findUserByName(name);
     if (user && difference(roles, role).length === 0) {

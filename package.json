@@ -8,7 +8,8 @@
     "watch": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
-    "dev": "npm run tsc && npm run start"
+    "dev": "npm run tsc && npm run start",
+    "sls:dev": "serverless offline start --useSeparateProcesses"
   },
   "author": "Haibin Xiang",
   "license": "ISC",

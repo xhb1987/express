@@ -1,4 +1,4 @@
-import { Service, Inject } from "typedi";
+import { Service } from "typedi";
 import UserRepository from "../../model/user/repository";
 import { IUserModel } from "../../model/user/types";
 import RoleRepository from "../../model/role/repository";

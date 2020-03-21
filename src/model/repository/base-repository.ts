@@ -1,5 +1,4 @@
 import { Document, Model } from "mongoose";
-import { IUser, IUserModel } from "../user/types";
 
 export interface IRead<T extends Document> {
   findById: (
@@ -41,9 +40,10 @@ class Repository<T extends Document> implements IRepository<T> {
       });
     });
   }
+
   async find(callback?: (error: any, result: T[]) => void): Promise<T[]> {
     let self = this;
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       self._schema.find((err, res) => {
         if (callback) {
           callback(err, <T[]>res);
@@ -58,7 +58,7 @@ class Repository<T extends Document> implements IRepository<T> {
     callback?: (error: any, result: T[]) => void
   ): Promise<T[]> {
     let self = this;
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       self._schema.find({ name }, (err, res) => {
         if (callback) {
           callback(err, <T[]>res);

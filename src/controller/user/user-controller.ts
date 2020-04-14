@@ -16,7 +16,7 @@ import {
 } from "routing-controllers";
 import { UserModel } from "../../model/user/schema";
 import { RoleModel } from "../../model/role/schema";
-import { hash, compare } from "bcrypt";
+// import { hash, compare } from "bcrypt";
 import { sign, verify } from "jsonwebtoken";
 
 @JsonController("/user")

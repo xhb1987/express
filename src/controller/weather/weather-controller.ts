@@ -23,6 +23,8 @@ class WeatherController {
     @Param("woeid") woeid: number
   ): Promise<ResponseMessage<WeatherInfo>> {
     const weatherInfo = await this.weatherService.getWeatherInfo(woeid);
+
+    console.log(weatherInfo);
     return generateResponseMessage<WeatherInfo>(weatherInfo);
   }
 }

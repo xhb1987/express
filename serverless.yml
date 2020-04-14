@@ -4,21 +4,26 @@ custom:
   serverless-offline:
     port: 3001
 
+# provider:
+#   name: aliyun
+#   runtime: nodejs10
+#   credentials: ~/.aliyun/credentials
+#   timeout: 600
+
 provider:
   name: aws
   runtime: nodejs10.x
-  region: region, 'us-east-1'
+  region:  us-east-2
   memorySize: 256
   timeout: 3
-  stage: "dev"
-  environment:
-    SECRET: test-secret
+  stage: dev
+
 
 functions:
-  - ${file(./src/controller/user/user.yml)}
+  # - ${file(./src/controller/user/user.yml)}
   - ${file(./src/controller/weather/weather.yml)}
-  - ${file(./test.yml)}
+  # - ${file(./test.yml)}
 
 plugins:
-  - serverless-plugin-typescript
   - serverless-offline
+  - serverless-plugin-typescript

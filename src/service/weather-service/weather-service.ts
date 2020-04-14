@@ -25,7 +25,7 @@ class WeatherService {
         if (err) {
           reject(err);
         }
-
+        
         const data = res.toJSON().body as CityInfo;
         resolve(data);
       });
